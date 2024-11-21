@@ -11,3 +11,37 @@ Set it in env variable
 # Command line arguments to be given
 
 local 2022-08-02
+
+# ConfigLoader.py
+
+def get_config(env):
+
+based on env value, only that config values get loaded into the Python dictionary
+
+sbdl.conf
+
+[LOCAL]
+enable.hive = false
+hive.database = null
+kafka.topic = sbdl_kafka_cloud
+[QA]
+enable.hive = true
+hive.database = sbdl_db_qa
+kafka.topic = sbdl_kafka_qa
+[PROD]
+enable.hive = true
+hive.database = sbdl_db
+kafka.topic = sbdl_kafka
+
+
+#####################
+Chispa framework
+#####################
+
+Chispa framework is used to compare 2 DFs by ignoring
+nullable fields. We have passed the flag
+ignore_nullable=True
+
+from chispa import assert_df_equality
+assert_df_equality(expected_contract_df, actual_contract_df, ignore_nullable=True)
+
